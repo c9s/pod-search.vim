@@ -13,6 +13,7 @@ require App::Perldoc::Search::_Parser;
 #
 #   perl bin/podsearch [Pattern]  [Paths...]
 # 
+# XXX: add line number to result
 
 search_from_perldoc(@ARGV);
 exit;
