@@ -46,7 +46,6 @@ fun! s:search_from_pod(args)
     let command = [  "perl" , "bin/podsearch" ]
     let command += a:args
     let cmd = join(command," ")
-    echo cmd
     return system( cmd )
 endf
 
