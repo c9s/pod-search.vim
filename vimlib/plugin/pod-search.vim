@@ -14,6 +14,18 @@
 "
 "=cut
 
+
+if exists("g:loaded_pod_search") || v:version < 700
+    finish
+endif
+let g:loaded_pod_search = 1
+
+if ! executable('podsearch')
+    echomsg 'podsearch is not found in PATH. Plugin is not loaded.'
+    " Skip loading the plugin
+    finish
+endif
+
 fun! s:perldoc_search()
   let re = input("Pod Search:")
   if strlen(re) == 0 | redraw | return | endif
