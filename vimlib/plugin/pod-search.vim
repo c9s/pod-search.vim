@@ -1,16 +1,28 @@
 
+" Author: Cornelius ( cornelius.howl@delete-me.gmail.com )
+"         Takatoshi Kitano
+"
+" Last Change:  2009/10/31
+" Licence: MIT Licence
+"
+"=VERSION 0.1
+"
+"=DESCRIPTION 
+"
+" This is Perldoc search integration of vim plugin.
+" Type <C-c><C-p> to search keyword in pods
+"
+"=cut
+
 fun! s:perldoc_search()
   let re = input("Pod Search:")
   if strlen(re) == 0 | redraw | return | endif
-
   let path = input("Path:","","file")
   if strlen(path) == 0 | redraw | return | endif
 
   let output = s:search_from_pod([ re , path ])
-  let items = split(output,"\n")
-
   let qflist = []
-  for item in items 
+  for item in split(output,"\n") 
     let [path,name] = split(item," | ")
     call add(qflist, { 'filename':path, 'text':name , 'pattern': re })
   endfor
@@ -28,3 +40,4 @@ endf
 
 "command! -nargs=* -complete=file PerldocSearch :call s:PerldocSearch(<f-args>)
 " call s:perldoc_search()
+nmap <silent> <C-c><C-p> :cal s:perldoc_search()<CR>
