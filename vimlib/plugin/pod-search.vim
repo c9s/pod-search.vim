@@ -14,7 +14,6 @@
 "
 "=cut
 
-
 if exists("g:loaded_pod_search") || v:version < 700
     finish
 endif
@@ -53,3 +52,6 @@ endf
 "command! -nargs=* -complete=file PerldocSearch :call s:PerldocSearch(<f-args>)
 " call s:perldoc_search()
 nmap <silent> <C-c><C-p> :cal s:perldoc_search()<CR>
+
+
+

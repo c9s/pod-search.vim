@@ -1,0 +1,18 @@
+
+=name           pod-search.vim
+
+=author         Cornelius
+
+=version_from   vimlib/plugin/pod-search.vim
+
+=vim_version    >= 7.0
+
+=type           plugin
+
+=dependency
+
+
+=script
+
+=repository http://github.com/c9s/pod-search.vim
+
