@@ -34,7 +34,6 @@ fun! s:perldoc_search()
   let path = input("Path:","","file")
   if strlen(path) == 0 | redraw | return | endif
 
-  return
   let output = s:search_from_pod([ re , path ])
   let qflist = []
   for item in split(output,"\n") 
