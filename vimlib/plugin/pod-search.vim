@@ -19,10 +19,11 @@ if exists("g:loaded_pod_search") || v:version < 700
 endif
 let g:loaded_pod_search = 1
 
+" XXX:
 if ! executable('podsearch')
-    echomsg 'podsearch is not found in PATH. Plugin is not loaded.'
+    echomsg 'podsearch is not found in PATH. plugin is not loaded.'
     " Skip loading the plugin
-    finish
+    " finish
 endif
 
 fun! s:perldoc_search()
@@ -51,7 +52,8 @@ endf
 
 "command! -nargs=* -complete=file PerldocSearch :call s:PerldocSearch(<f-args>)
 " call s:perldoc_search()
-nmap <silent> <C-c><C-p> :cal s:perldoc_search()<CR>
+command! PodSearch  :cal s:perldoc_search()<CR>
+nmap     <C-c><C-p> :PodSearch<CR>
 
 
 

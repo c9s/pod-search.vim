@@ -14,5 +14,7 @@
 
 =script
 
+  bin/podsearch 
+
 =repository http://github.com/c9s/pod-search.vim
 
