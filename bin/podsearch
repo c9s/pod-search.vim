@@ -8,6 +8,12 @@ require Pod::Usage;
 require IO::File;
 require App::Perldoc::Search::_Parser;
 
+
+# podsearch usage:
+#
+#   perl bin/podsearch [Pattern]  [Paths...]
+# 
+
 search_from_perldoc(@ARGV);
 exit;
 
@@ -32,8 +38,8 @@ sub search_from_perldoc {
     my @search_path = @ARGV ? @ARGV : @INC;
 
     # Search all files.
-    File::Find::find(
-        {   follow_fast => 1,
+    File::Find::find( {   
+            follow_fast => 1,
             no_chdir    => 1,
             wanted      => sub {
                 return
