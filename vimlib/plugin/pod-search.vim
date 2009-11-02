@@ -16,9 +16,11 @@
 "
 "=cut
 
+
 if exists("g:loaded_pod_search") || v:version < 700
-    finish
+    "finish
 endif
+
 let g:loaded_pod_search = 1
 
 " XXX:
@@ -27,6 +29,29 @@ if ! executable('podsearch')
     " Skip loading the plugin
     " finish
 endif
+
+
+let s:podsrh_window = copy( swindow#class  )
+fun! s:podsrh_window.init_buffer()
+
+endf
+fun! s:podsrh_window.buffer_reload_init()
+
+endf
+
+fun! s:podsrh_window.init_mapping()
+
+endf
+
+fun! s:podsrh_window.init_syntax()
+
+endf
+
+fun! s:podsrh_window.update_search()
+
+endf
+
+
 
 fun! s:perldoc_search()
   let re = input("Pod Search:")
@@ -45,7 +70,7 @@ fun! s:perldoc_search()
 endf
 
 fun! s:search_from_pod(args)
-    let command = add(["perl","bin/podsearch"],a:args)  "XXX: path
+    let command = add(["podsearch"],a:args)
     return system( join(command," ") )
 endf
 
