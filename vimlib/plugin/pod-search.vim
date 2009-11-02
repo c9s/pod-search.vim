@@ -23,7 +23,7 @@ endif
 
 let g:loaded_pod_search = 1
 
-" XXX:
+" make sure we have podsearch script
 if ! executable('podsearch')
     " echomsg 'podsearch is not found in PATH. plugin is not loaded.'
     " Skip loading the plugin
@@ -31,10 +31,15 @@ if ! executable('podsearch')
 endif
 
 
+
+" pod search window &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
 let s:podsrh_window = copy( swindow#class  )
+
 fun! s:podsrh_window.init_buffer()
 
 endf
+
 fun! s:podsrh_window.buffer_reload_init()
 
 endf
@@ -51,7 +56,11 @@ fun! s:podsrh_window.update_search()
 
 endf
 
+" pod search window &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
+" test code
+"
+call s:podsrh_window.open('topleft','split',10)
 
 fun! s:perldoc_search()
   let re = input("Pod Search:")
@@ -76,7 +85,8 @@ endf
 
 "command! -nargs=* -complete=file PerldocSearch :call s:PerldocSearch(<f-args>)
 " call s:perldoc_search()
-command! PodSearch  :cal s:perldoc_search()
+com! PodSearch            :cal s:perldoc_search()
+com! OpenPodSearchWindow  :cal s:CPANWindow.open('topleft', 'split',10)
 nmap     <C-c><C-p> :PodSearch<CR>
 
 
