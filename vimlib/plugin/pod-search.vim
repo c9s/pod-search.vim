@@ -43,7 +43,7 @@ endf
 
 " pod search window &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-if swindow#class.version < 0.5
+if swindow#class.version < 0.4
   echo "Please upgrade search-window.vim to version 0.4"
   echo "Current version: v" . string(swindow#class.version)
   echo "http://github.com/c9s/search-window.vim"
