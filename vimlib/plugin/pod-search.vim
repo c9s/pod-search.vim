@@ -71,13 +71,13 @@ fun! s:podsrh.buffer_reload_init()
 endf
 
 fun! s:podsrh.init_mapping()
-  nnoremap <silent> <buffer> $       :PodSrhPerldocOpen<CR>
+  nnoremap <silent> <buffer> $       :PodSPerldocOpen<CR>
   nnoremap <silent> <buffer> <Enter> :call libperl#open_module()<CR>
   nnoremap <silent> <buffer> t       :call libperl#tab_open_module_file_in_paths( getline('.') )<CR>
 endf
 
 fun! s:podsrh.buffer_name()
-  exec 'silent file ' . s:last_pattern
+  exec 'silent file PODS-' . s:last_pattern
 endf
 
 " only render the first column
@@ -98,7 +98,6 @@ fun! s:open_perldoc()
   let mod = matchstr( line , '^\S\+' )
   cal  g:perldoc.open(mod,'')
 endf
-com! PodSrhPerldocOpen  :call s:open_perldoc()
 
 fun! s:search_prompt()
   let pattern = input("Pod Search Pattern:")
@@ -113,6 +112,19 @@ fun! s:pod_search(...)
     let ret = s:search_prompt()
     if strlen(ret.pattern) == 0 | redraw | return | endif
     if strlen(ret.path) == 0 | redraw | return | endif
+  endif
+
+  " XXX: refactor this to search-window.vim
+  let bname = 'PODS-' . ret.pattern
+  let b = bufnr( ret.pattern )
+  if b != -1
+    " found buffer
+    " switch to it
+    exec 'sbuffer ' . b
+    resize 10
+    call cursor(1,1)
+    startinsert
+    return
   endif
 
   cal s:echo("Searching for '" . ret.pattern . "' in ". ret.path ."..." )
@@ -150,10 +162,10 @@ endf
 
 "command! -nargs=* -complete=file PerldocSearch :call s:PerldocSearch(<f-args>)
 " call s:pod_search()
-com! PodSearch            :cal s:pod_search()
-com! OpenPodSearchWindow  :cal s:podsrh.open('topleft', 'split',10)
+" com! OpenPodSearchWindow  :cal s:podsrh.open('topleft', 'split',10)
 
-" nmap <C-c><C-p> :PodSearch<CR>
+com! PodSPerldocOpen      :cal s:open_perldoc()
+com! PodSearch            :cal s:pod_search()
 
 " test code
-" cal s:pod_search( 'ORZ', '/Users/c9s/svn_working/jifty-dbi/lib/Jifty/DBI' )
+" cal s:pod_search( 'Collection', '/Users/c9s/svn_working/jifty-dbi/lib/Jifty/DBI' )
