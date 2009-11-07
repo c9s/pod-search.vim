@@ -64,7 +64,7 @@ fun! s:podsrh.buffer_reload_init()
 endf
 
 fun! s:podsrh.init_mapping()
-  nnoremap <silent> <buffer> $   :cal  g:perldoc.open(expand('<cWORD>'),'')<CR>
+  nnoremap <silent> <buffer> $       :PodSrhPerldocOpen<CR>
   nnoremap <silent> <buffer> <Enter> :call libperl#open_module()<CR>
   nnoremap <silent> <buffer> t       :call libperl#tab_open_module_file_in_paths( getline('.') )<CR>
 endf
@@ -73,9 +73,8 @@ fun! s:podsrh.buffer_name()
   exec 'silent file ' . s:last_pattern
 endf
 
-
 " only render the first column
-fun! swindow#class.filter_render(lines)
+fun! s:podsrh.filter_render(lines)
   cal map( a:lines , 'v:val[0]' )
 endf
 
@@ -86,6 +85,13 @@ fun! s:podsrh.filter_result(ptn,list)
 endf
 
 " pod search window &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+fun! s:open_perldoc()
+  let line = getline('.')
+  let mod = matchstr( line , '^\S\+' )
+  cal  g:perldoc.open(mod,'')
+endf
+com! PodSrhPerldocOpen  :call s:open_perldoc()
 
 fun! s:search_prompt()
   let pattern = input("Pod Search Pattern:")
@@ -138,4 +144,5 @@ com! PodSearch            :cal s:pod_search()
 com! OpenPodSearchWindow  :cal s:podsrh.open('topleft', 'split',10)
 nmap <C-c><C-p> :PodSearch<CR>
 
-cal s:pod_search( 'DBI', '/Users/c9s/svn_working/jifty-dbi/lib/Jifty/DBI/Collection' )
+" test code
+" cal s:pod_search( 'DBI', '/Users/c9s/svn_working/jifty-dbi/lib/Jifty/DBI' )
