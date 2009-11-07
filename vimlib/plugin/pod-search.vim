@@ -124,7 +124,7 @@ fun! s:pod_search(...)
 
   " XXX: refactor this to search-window.vim
   let bname = 'PODS-' . ret.pattern
-  let b = bufnr( ret.pattern )
+  let b = bufnr( bname )
   if b != -1
     " found buffer
     " switch to it
@@ -174,7 +174,7 @@ endf
 " com! OpenPodSearchWindow  :cal s:podsrh.open('topleft', 'split',10)
 
 com! PodSPerldocOpen          :cal s:open_perldoc()
-com! PodSPerldocOpenTab       :cal s:open_perldoc_tab()
+com! PodSPerldocOpenTab       :cal s:open_perldoc_tab(0)
 com! PodSPerldocOpenTabStay   :cal s:open_perldoc_tab(1)
 com! PodSearch                :cal s:pod_search()
 
