@@ -11,6 +11,11 @@
 
 =dependency
 
+    perldoc.vim 
+        | autoload/perldoc.vim | http://github.com/c9s/perldoc.vim/raw/master/vimlib/autoload/perldoc.vim
+
+    search-window.vim 
+        | autoload/swindow.vim | http://github.com/c9s/search-window.vim/raw/master/vimlib/autoload/swindow.vim
 
 =script
 
