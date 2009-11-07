@@ -71,9 +71,11 @@ fun! s:podsrh.buffer_reload_init()
 endf
 
 fun! s:podsrh.init_mapping()
-  nnoremap <silent> <buffer> $       :PodSPerldocOpen<CR>
-  nnoremap <silent> <buffer> <Enter> :call libperl#open_module()<CR>
-  nnoremap <silent> <buffer> t       :call libperl#tab_open_module_file_in_paths( getline('.') )<CR>
+  nnoremap <silent> <buffer> <Enter> :PodSPerldocOpen<CR>
+  nnoremap <silent> <buffer> t       :PodSPerldocOpenTab<CR>
+  nnoremap <silent> <buffer> T       :PodSPerldocOpenTabStay<CR>
+  nnoremap <silent> <buffer> e       :cal libperl#open_module()<CR>
+  " nnoremap <silent> <buffer> t       :call libperl#tab_open_module_file_in_paths( getline('.') )<CR>
 endf
 
 fun! s:podsrh.buffer_name()
@@ -97,6 +99,12 @@ fun! s:open_perldoc()
   let line = getline('.')
   let mod = matchstr( line , '^\S\+' )
   cal  g:perldoc.open(mod,'')
+endf
+
+fun! s:open_perldoc_tab(stay)
+  let line = getline('.')
+  let mod = matchstr( line , '^\S\+' )
+  cal g:perldoc.open_tab(mod,'',a:stay)
 endf
 
 fun! s:search_prompt()
@@ -140,8 +148,9 @@ fun! s:pod_search(...)
   endif
 endf
 
+" XXX: podsearch binary must be executable
 fun! s:search_from_pod(args)
-    let command = extend(["perl","bin/podsearch"],a:args)
+    let command = extend(["podsearch"],a:args)
     return split(system( join(command," ") ),"\n")
 endf
 
@@ -164,8 +173,10 @@ endf
 " call s:pod_search()
 " com! OpenPodSearchWindow  :cal s:podsrh.open('topleft', 'split',10)
 
-com! PodSPerldocOpen      :cal s:open_perldoc()
-com! PodSearch            :cal s:pod_search()
+com! PodSPerldocOpen          :cal s:open_perldoc()
+com! PodSPerldocOpenTab       :cal s:open_perldoc_tab()
+com! PodSPerldocOpenTabStay   :cal s:open_perldoc_tab(1)
+com! PodSearch                :cal s:pod_search()
 
 " test code
 cal s:pod_search( 'Collection', '/Users/c9s/svn_working/jifty-dbi/lib/Jifty/DBI' )
