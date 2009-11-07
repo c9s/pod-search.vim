@@ -119,9 +119,13 @@ fun! s:pod_search(...)
   let s:last_pattern = ret.pattern
 
   let result = s:search_from_pod([ ret.pattern , ret.path ])
-  cal map( result , 'split(v:val," | ")')
-  let s:podsrh.predefined_index = result
-  cal s:podsrh.open('topleft', 'split',10)
+  if len( result ) > 0
+    cal map( result , 'split(v:val," | ")')
+    let s:podsrh.predefined_index = result
+    cal s:podsrh.open('topleft', 'split',10)
+  else 
+    cal s:echo("Nothing found.")
+  endif
 endf
 
 fun! s:search_from_pod(args)
@@ -152,4 +156,4 @@ com! OpenPodSearchWindow  :cal s:podsrh.open('topleft', 'split',10)
 " nmap <C-c><C-p> :PodSearch<CR>
 
 " test code
-" cal s:pod_search( 'DBI', '/Users/c9s/svn_working/jifty-dbi/lib/Jifty/DBI' )
+" cal s:pod_search( 'ORZ', '/Users/c9s/svn_working/jifty-dbi/lib/Jifty/DBI' )
