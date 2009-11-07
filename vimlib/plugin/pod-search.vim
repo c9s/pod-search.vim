@@ -44,6 +44,13 @@ endf
 " pod search window &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 let s:podsrh = copy( swindow#class  )
+
+if s:podsrh.version < 0.4
+  echo "Please upgrade search-window.vim to version 0.4"
+  echo "http://github.com/c9s/search-window.vim"
+  finish
+endf
+
 let s:podsrh.predefined_index = [ ]
 
 fun! s:podsrh.index()
