@@ -49,7 +49,7 @@ if s:podsrh.version < 0.4
   echo "Please upgrade search-window.vim to version 0.4"
   echo "http://github.com/c9s/search-window.vim"
   finish
-endf
+endif
 
 let s:podsrh.predefined_index = [ ]
 
@@ -144,12 +144,12 @@ fun! s:emerge(result)
   endif
 endf
 
-
 "command! -nargs=* -complete=file PerldocSearch :call s:PerldocSearch(<f-args>)
 " call s:pod_search()
 com! PodSearch            :cal s:pod_search()
 com! OpenPodSearchWindow  :cal s:podsrh.open('topleft', 'split',10)
-nmap <C-c><C-p> :PodSearch<CR>
+
+" nmap <C-c><C-p> :PodSearch<CR>
 
 " test code
 " cal s:pod_search( 'DBI', '/Users/c9s/svn_working/jifty-dbi/lib/Jifty/DBI' )
