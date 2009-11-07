@@ -82,7 +82,8 @@ sub search_from_perldoc {
                     $name =~ s/\n//g;
                     return unless $pod_location;
 
-                    printf "%s | %s\n", $pod_location, $name;
+                    # printf "%s | %s\n", $pod_location, $name;
+                    printf "%s | %s\n", $name , $pod_location;
                 }
             }
         },
