@@ -179,4 +179,4 @@ com! PodSPerldocOpenTabStay   :cal s:open_perldoc_tab(1)
 com! PodSearch                :cal s:pod_search()
 
 " test code
-cal s:pod_search( 'Collection', '/Users/c9s/svn_working/jifty-dbi/lib/Jifty/DBI' )
+" cal s:pod_search( 'Collection', '/Users/c9s/svn_working/jifty-dbi/lib/Jifty/DBI' )
